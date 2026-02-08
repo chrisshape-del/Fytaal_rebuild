@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Studio Schedule - Luxury Boutique Variant</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ecb613",
+                        "background-light": "#f8f8f6",
+                        "background-dark": "#121212",
+                        "surface-dark": "#1e1e1e",
+                        "border-dark": "#333333"
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #121212;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #333333;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-border-dark px-6 lg:px-12 py-4">
+<div class="max-w-[1600px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-12">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded flex items-center justify-center text-background-dark">
+<span class="material-symbols-outlined font-bold">diamond</span>
+</div>
+<h2 class="text-xl font-extrabold tracking-tighter uppercase">Luxe Studio</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-primary text-sm font-bold uppercase tracking-widest" href="#">Schedule</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-white text-sm font-bold uppercase tracking-widest transition-colors" href="#">My Bookings</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-white text-sm font-bold uppercase tracking-widest transition-colors" href="#">Memberships</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-white text-sm font-bold uppercase tracking-widest transition-colors" href="#">Trainers</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center bg-slate-100 dark:bg-surface-dark px-4 py-2 rounded-lg border border-transparent focus-within:border-primary/50 transition-all">
+<span class="material-symbols-outlined text-slate-400 text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm placeholder:text-slate-500 w-48" placeholder="Search sessions..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-primary rounded-full"></span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 dark:bg-border-dark mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold uppercase tracking-tighter">Alexander Rossi</p>
+<p class="text-[10px] text-primary font-bold uppercase tracking-widest">Elite Member</p>
+</div>
+<img alt="Profile" class="size-10 rounded-full border-2 border-primary/20 object-cover" data-alt="Profile picture of an elite member" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCa9JdJUhi6Z66sAoTJjAkwjzXuY6FZ33GL1k3pD-iDohWYY_GOZZ24j9z2BQl3yluITZ6V2ScRAUMui7CpC_s-SMRvUNt2Hu027iR3OFe4AmtOjvtOUmzt0j-p63Vuy-MSc_-vjURUf8f7gCcODD4In7LeaXdddKKcyrG9Z3WfoXN0Ee9pD7QG1bDNTz2Mzq-dWDw73XKBihlfVPKfI0Jm4g26NetGvHCLZYVLGCtZfZYGuomCYWfbTJh32wd6j4BjGnK6oS6lowVr"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1600px] mx-auto px-6 lg:px-12 py-10">
+<!-- Dashboard Header -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12">
+<div>
+<span class="text-primary font-bold uppercase tracking-[0.3em] text-xs mb-3 block">Boutique Experience</span>
+<h1 class="text-5xl lg:text-7xl font-black tracking-tighter uppercase mb-4 leading-none">Studio <span class="text-transparent border-white dark:border-white border px-2 py-0 inline-block" style="-webkit-text-stroke: 1px white;">Schedule</span></h1>
+<p class="text-slate-500 dark:text-slate-400 text-lg max-w-xl font-light">
+                    Your curated journey to peak performance. Experience bespoke training in a sophisticated, private environment.
+                </p>
+</div>
+<div class="flex flex-wrap gap-4">
+<div class="bg-slate-100 dark:bg-surface-dark border border-slate-200 dark:border-border-dark p-4 rounded-xl flex items-center gap-6 min-w-[240px]">
+<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">credit_card</span>
+</div>
+<div>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest">Available Credits</p>
+<p class="text-2xl font-black">12 <span class="text-sm font-medium text-slate-400 uppercase ml-1">Sessions</span></p>
+</div>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-background-dark font-black uppercase tracking-widest text-sm px-8 py-4 rounded-xl transition-all shadow-lg shadow-primary/10 flex items-center gap-2 h-fit self-end">
+<span>Book Private Session</span>
+<span class="material-symbols-outlined text-xl">arrow_right_alt</span>
+</button>
+</div>
+</div>
+<!-- Filter & View Selector -->
+<div class="flex flex-col md:flex-row items-center justify-between border-y border-slate-200 dark:border-border-dark py-6 mb-8 gap-6">
+<div class="flex items-center gap-4 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto custom-scrollbar">
+<button class="px-6 py-2 bg-primary text-background-dark font-bold text-xs uppercase tracking-widest rounded-full whitespace-nowrap">All Sessions</button>
+<button class="px-6 py-2 bg-slate-100 dark:bg-surface-dark hover:bg-slate-200 dark:hover:bg-border-dark text-slate-600 dark:text-slate-300 font-bold text-xs uppercase tracking-widest rounded-full transition-colors whitespace-nowrap">Strength &amp; Power</button>
+<button class="px-6 py-2 bg-slate-100 dark:bg-surface-dark hover:bg-slate-200 dark:hover:bg-border-dark text-slate-600 dark:text-slate-300 font-bold text-xs uppercase tracking-widest rounded-full transition-colors whitespace-nowrap">Mind &amp; Body</button>
+<button class="px-6 py-2 bg-slate-100 dark:bg-surface-dark hover:bg-slate-200 dark:hover:bg-border-dark text-slate-600 dark:text-slate-300 font-bold text-xs uppercase tracking-widest rounded-full transition-colors whitespace-nowrap">High Intensity</button>
+</div>
+<div class="flex items-center bg-slate-100 dark:bg-surface-dark p-1 rounded-xl border border-slate-200 dark:border-border-dark">
+<button class="px-4 py-2 bg-white dark:bg-border-dark shadow-sm rounded-lg flex items-center gap-2 text-xs font-bold uppercase tracking-widest">
+<span class="material-symbols-outlined text-lg">calendar_view_week</span>
+                    Weekly
+                </button>
+<button class="px-4 py-2 hover:bg-slate-200 dark:hover:bg-border-dark/50 rounded-lg flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 transition-all">
+<span class="material-symbols-outlined text-lg">calendar_view_day</span>
+                    Daily
+                </button>
+<button class="px-4 py-2 hover:bg-slate-200 dark:hover:bg-border-dark/50 rounded-lg flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 transition-all">
+<span class="material-symbols-outlined text-lg">calendar_month</span>
+                    Monthly
+                </button>
+</div>
+</div>
+<!-- Schedule Grid Container -->
+<div class="overflow-x-auto custom-scrollbar">
+<div class="min-w-[1200px]">
+<!-- Calendar Week Header -->
+<div class="grid grid-cols-7 mb-4">
+<div class="flex flex-col items-center py-4 border-r border-slate-200 dark:border-border-dark">
+<span class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-[0.2em] mb-1">Monday</span>
+<span class="text-3xl font-black">12</span>
+</div>
+<div class="flex flex-col items-center py-4 border-r border-slate-200 dark:border-border-dark bg-primary/5">
+<span class="text-[10px] text-primary font-bold uppercase tracking-[0.2em] mb-1">Tuesday</span>
+<span class="text-3xl font-black text-primary">13</span>
+<div class="size-1.5 bg-primary rounded-full mt-1"></div>
+</div>
+<div class="flex flex-col items-center py-4 border-r border-slate-200 dark:border-border-dark">
+<span class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-[0.2em] mb-1">Wednesday</span>
+<span class="text-3xl font-black text-slate-400">14</span>
+</div>
+<div class="flex flex-col items-center py-4 border-r border-slate-200 dark:border-border-dark">
+<span class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-[0.2em] mb-1">Thursday</span>
+<span class="text-3xl font-black">15</span>
+</div>
+<div class="flex flex-col items-center py-4 border-r border-slate-200 dark:border-border-dark">
+<span class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-[0.2em] mb-1">Friday</span>
+<span class="text-3xl font-black">16</span>
+</div>
+<div class="flex flex-col items-center py-4 border-r border-slate-200 dark:border-border-dark opacity-50">
+<span class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-[0.2em] mb-1">Saturday</span>
+<span class="text-3xl font-black">17</span>
+</div>
+<div class="flex flex-col items-center py-4 opacity-50">
+<span class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-[0.2em] mb-1">Sunday</span>
+<span class="text-3xl font-black">18</span>
+</div>
+</div>
+<!-- Grid Rows -->
+<div class="grid grid-cols-7 border-t border-slate-200 dark:border-border-dark relative">
+<!-- Current Time Indicator (Visual) -->
+<div class="absolute left-0 right-0 top-[240px] border-t-2 border-primary/40 z-10 flex items-center">
+<span class="bg-primary text-background-dark text-[9px] font-black px-1.5 py-0.5 uppercase tracking-tighter">NOW</span>
+</div>
+<!-- Column 1: MON -->
+<div class="flex flex-col gap-4 p-4 border-r border-slate-200 dark:border-border-dark min-h-[800px]">
+<!-- Session Card -->
+<div class="group bg-slate-100 dark:bg-surface-dark border border-slate-200 dark:border-border-dark hover:border-primary/50 p-5 rounded-xl transition-all duration-300 cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">07:00 - 08:30</span>
+<span class="material-symbols-outlined text-slate-600 group-hover:text-primary transition-colors">more_horiz</span>
+</div>
+<h3 class="text-lg font-extrabold uppercase leading-tight mb-4 group-hover:translate-x-1 transition-transform">Elite Strength</h3>
+<div class="flex items-center gap-3">
+<img alt="Sophia" class="size-8 rounded-full grayscale group-hover:grayscale-0 transition-all object-cover" data-alt="Portrait of a female fitness trainer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFSJy7KrEDUwJLQ61j71ZkOZJIvlSM-iLpBCvuTu_RFIt-xVuGAREgThhIkpKE84T8rq3Ho2CKhwm2jBMXMfKROg7Q8i0p7XeD65HIjgC8GaHES1XyFeAzWk67CKOqY0z4P9kJ_Z1IZc99uyz_3ExKkc2bRVFk5yTX3ksR4yVCiNbIvEd-izcmhybh8Fo7eepXWZistp-TL_0KxpW_CDFqLraNxSzetS7CT3dG5BSISve5QttyvCanGKjZPA1AIpYBugcOBzW5KzfV"/>
+<div>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest">Trainer</p>
+<p class="text-xs font-bold uppercase">Sophia Miller</p>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-slate-200 dark:border-border-dark flex justify-between items-center">
+<span class="text-[10px] text-slate-500 font-bold uppercase">Full Capacity</span>
+<div class="flex -space-x-2">
+<div class="size-5 rounded-full bg-slate-700 border border-surface-dark"></div>
+<div class="size-5 rounded-full bg-slate-600 border border-surface-dark"></div>
+<div class="size-5 rounded-full bg-slate-500 border border-surface-dark"></div>
+</div>
+</div>
+</div>
+<div class="group bg-slate-100 dark:bg-surface-dark border border-slate-200 dark:border-border-dark hover:border-primary/50 p-5 rounded-xl transition-all duration-300 cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">11:00 - 12:00</span>
+<span class="material-symbols-outlined text-slate-600">bookmark</span>
+</div>
+<h3 class="text-lg font-extrabold uppercase leading-tight mb-4 group-hover:translate-x-1 transition-transform">Mobility Flow</h3>
+<div class="flex items-center gap-3">
+<img alt="Marcus" class="size-8 rounded-full grayscale group-hover:grayscale-0 transition-all object-cover" data-alt="Portrait of a male fitness trainer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtDKIYk2FWTnqu6zHL1MOB3l0aQB_U8-2XCtsCdE3rz5m4pMEDnZ1xy5uxsEMVcxtHv2sS1lll9Yzems5qCd7zBasi7pCeErqPHkFs-R2aG7G93QgWuwa87CPzcWkb65QY3A4kGkKcO6X7pr8fvbgv-n2HLvR6f8OB9bl-AnywcQJnwgeF95vn27KYA3CUDe1u7Lis30hiji7FFcrIdkBcPmRNxvUawNouCAhnrLUkvrujJj5TRpZhVHsoyw0MTge4TX-051bn0ndq"/>
+<div>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest">Trainer</p>
+<p class="text-xs font-bold uppercase">Marcus Chen</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 2: TUE (Active) -->
+<div class="flex flex-col gap-4 p-4 border-r border-slate-200 dark:border-border-dark bg-primary/[0.02]">
+<div class="group bg-slate-100 dark:bg-surface-dark border border-slate-200 dark:border-border-dark hover:border-primary/50 p-5 rounded-xl transition-all duration-300 cursor-pointer border-l-4 border-l-primary">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">09:00 - 10:30</span>
+<div class="px-2 py-0.5 bg-primary/20 text-primary text-[8px] font-black uppercase tracking-widest rounded">Booked</div>
+</div>
+<h3 class="text-lg font-extrabold uppercase leading-tight mb-4">Advanced HIIT</h3>
+<div class="flex items-center gap-3">
+<img alt="Julian" class="size-8 rounded-full grayscale group-hover:grayscale-0 transition-all object-cover" data-alt="Portrait of a male athletic trainer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm3P3_JIuPIRdyWmwrVxszt40bkT5R1yjs3QjpniRYduS6GpbzHnrwXDvkzoPOwAbZPB1T9fO5bgj0DAgz6K9YGrdO5b7-hhh73yN97AqSqx_yLbH86l2y2M0lcBs4dWXVvyKrnyqifwfWMqpLEBVvRGuYe2XTIZ7MXjmqTCIEnXnLVQbMEsv7OjRm8UDEmP0RnWocIAfjDelOOI1hRpZaqWK9z1p6aBNL_bdepVKg-qOPoANyo4NFWZFbbPqn5kke0RFJKo_Y5dS-"/>
+<div>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest">Trainer</p>
+<p class="text-xs font-bold uppercase">Julian Vane</p>
+</div>
+</div>
+</div>
+<!-- Spacer for Grid feel -->
+<div class="h-32"></div>
+<div class="group bg-slate-100 dark:bg-surface-dark border border-slate-200 dark:border-border-dark hover:border-primary/50 p-5 rounded-xl transition-all duration-300 cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/5 -mr-12 -mt-12 rounded-full blur-2xl"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">18:00 - 19:30</span>
+<span class="text-primary material-symbols-outlined text-sm font-bold">bolt</span>
+</div>
+<h3 class="text-lg font-extrabold uppercase leading-tight mb-4">Power Lifting</h3>
+<div class="flex items-center gap-3">
+<img alt="Sarah" class="size-8 rounded-full grayscale group-hover:grayscale-0 transition-all object-cover" data-alt="Portrait of a strong fitness coach" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnV0YIz_BUA5x26iOTaTpN-1LHZh_HruRERTWQL9x86qjpuPPN_TEuVPzZKiMfD1vJi95iiXEivP3czo1w09puS_1PdWuvkmvgBlOqIat5PfCYXeDqdWjcGrgNasUmP5fIK6PumRiFp3DdDQ-W8DXEfEK6u8IYypQnjI6Vk8bCzMf4n5VVtwZS-1b-7OzyrENTbr-52exnyXK-e5HcdbfzXCDyGUzJ_zDFcp7FUHHStScjX6n0I0X1JIucztkzzZuiuI2Uu2bPRwlW"/>
+<div>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest">Trainer</p>
+<p class="text-xs font-bold uppercase">Sarah Thorne</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 3: WED -->
+<div class="flex flex-col gap-4 p-4 border-r border-slate-200 dark:border-border-dark">
+<div class="group bg-slate-100 dark:bg-surface-dark border border-slate-200 dark:border-border-dark hover:border-primary/50 p-5 rounded-xl transition-all duration-300 cursor-pointer opacity-80 hover:opacity-100">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">08:00 - 09:00</span>
+<span class="text-slate-500 text-[10px] font-bold uppercase">Waitlist</span>
+</div>
+<h3 class="text-lg font-extrabold uppercase leading-tight mb-4">Core Focus</h3>
+<div class="flex items-center gap-3">
+<img alt="Sophia" class="size-8 rounded-full grayscale group-hover:grayscale-0 transition-all object-cover" data-alt="Portrait of a female fitness trainer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaW1liZCANpzdHerz2k2kxy3xwVagPLwlB769F5SJzbS_qhdjBH4_w-bgcDCBYp8e-SHpdFdP1Yzdf3697ABTQkGQ-xMXbf4Pot5hCh-rYhP4LDAG9m9zOBNLMj6-gzYRazaiS2WUZlApagVy-8tvvl49f0_oeDdcNglepeQhH8XmCUSAl-bppy1X21g7Bmgk21BMxilyFo3wykuGNntTJg1njXxkIF_XEx2KQcSlc1bjN9Setz9p1Y6hHmaRQj3jNDv-fWc4S7n5Y"/>
+<div>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest">Trainer</p>
+<p class="text-xs font-bold uppercase">Sophia Miller</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 4: THU -->
+<div class="flex flex-col gap-4 p-4 border-r border-slate-200 dark:border-border-dark">
+<div class="h-48"></div>
+<div class="group bg-slate-100 dark:bg-surface-dark border border-slate-200 dark:border-border-dark hover:border-primary/50 p-5 rounded-xl transition-all duration-300 cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">14:00 - 15:30</span>
+<span class="text-primary text-[10px] font-black tracking-widest uppercase">2 Spots Left</span>
+</div>
+<h3 class="text-lg font-extrabold uppercase leading-tight mb-4">Yoga Recovery</h3>
+<div class="flex items-center gap-3">
+<img alt="Marcus" class="size-8 rounded-full grayscale group-hover:grayscale-0 transition-all object-cover" data-alt="Portrait of a male yoga instructor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdpwp83xXYOkalJ352r3jj_abbhVP6chhBpXMfBENvIf51BCPYt25-RGg95_UkGfv8AYLODmQ32vgZaR5yQdtMdpb1wq03qFstkQFQkKpAhRdzf6MmUlVFkZ2Tv1fBmy6760GuzjfzztAgrvD0yuNH8PeqfWHAGKe-pOxKx-Tvc9RF_yn2yV1vDQqdzvirUM8QlgDjUYLj0Zsvjru7OHtHhypGsU909H1ZcvhVfd-QIFOCAN0kmHScUvBtJ2-2piG6ENg1i_qLuwy5"/>
+<div>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest">Trainer</p>
+<p class="text-xs font-bold uppercase">Marcus Chen</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 5: FRI -->
+<div class="flex flex-col gap-4 p-4 border-r border-slate-200 dark:border-border-dark">
+<div class="group bg-slate-100 dark:bg-surface-dark border border-slate-200 dark:border-border-dark hover:border-primary/50 p-5 rounded-xl transition-all duration-300 cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">10:00 - 11:30</span>
+<span class="material-symbols-outlined text-slate-600">visibility</span>
+</div>
+<h3 class="text-lg font-extrabold uppercase leading-tight mb-4">Endurance Lab</h3>
+<div class="flex items-center gap-3">
+<img alt="Julian" class="size-8 rounded-full grayscale group-hover:grayscale-0 transition-all object-cover" data-alt="Portrait of a focused athlete trainer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLp9XdA7xvS5-oeA7Aqr5f25BP0dJ9wPQkFlR_ELFQVRKdH7-NDCBqeiRV02yRJ4_LjaQ2SHRrUq5Q3JOXYj09_SBucS7z--6dUbCDaZ8vs0u0IOzjy8QPplm7Rl8RXwm3ocCY3lCtiKitVe6_hmGXbvWAfso4h4ui55yMJ39mVb4T6ed6Nba_f4nYs_5ipY6S-foMbQXJLMNfZMbBQVzOa34JyJe9yR_Ie8atSh69gp7doodje2hb89kwfBjEJMg_giG0U8SZ1qoN"/>
+<div>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest">Trainer</p>
+<p class="text-xs font-bold uppercase">Julian Vane</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 6 & 7: Weekend (Muted) -->
+<div class="flex flex-col gap-4 p-4 border-r border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-white/5 opacity-50">
+<div class="h-full flex items-center justify-center">
+<p class="text-[10px] font-bold uppercase tracking-[0.4em] rotate-90 whitespace-nowrap text-slate-400">Limited Sessions</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 p-4 bg-slate-50 dark:bg-white/5 opacity-50">
+<div class="h-full flex items-center justify-center">
+<p class="text-[10px] font-bold uppercase tracking-[0.4em] rotate-90 whitespace-nowrap text-slate-400">Closed</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer / Legend -->
+<div class="mt-12 flex flex-col md:flex-row items-center justify-between border-t border-slate-200 dark:border-border-dark pt-8 gap-6">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-primary"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Your Bookings</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-slate-700"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Waitlist Available</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full border border-slate-600"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">External Studio Event</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Need assistance?</p>
+<a class="text-primary font-black uppercase text-xs tracking-widest hover:underline decoration-2 underline-offset-4 transition-all" href="#">Contact Concierge</a>
+</div>
+</div>
+</main>
+<!-- Side Concierge Panel (Abstract Representation) -->
+<div class="fixed bottom-8 right-8 z-40">
+<button class="size-16 bg-primary text-background-dark rounded-full shadow-2xl flex items-center justify-center group hover:scale-110 transition-all duration-300">
+<span class="material-symbols-outlined text-3xl font-bold">support_agent</span>
+</button>
+</div>
+</body></html>
