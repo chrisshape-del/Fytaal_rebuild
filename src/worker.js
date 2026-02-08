@@ -11,7 +11,10 @@ export default {
         if (response.status === 404 && !url.pathname.startsWith('/assets/')) {
             // Fetch index.html to support SPA routing
             const indexResponse = await env.ASSETS.fetch(new Request(new URL('/index.html', request.url), request));
-            return indexResponse;
+            return new Response(indexResponse.body, {
+                headers: indexResponse.headers,
+                status: 200
+            });
         }
 
         return response;
