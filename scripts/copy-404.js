@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const distDir = path.resolve(__dirname, 'dist');
+const distDir = path.resolve(__dirname, '../dist');
 
 const indexHtml = path.join(distDir, 'index.html');
 const fourOhFourHtml = path.join(distDir, '404.html');
