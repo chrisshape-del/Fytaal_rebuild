@@ -31,18 +31,7 @@ export default function Layout() {
             {/* Main Content Area */}
             {/* AnimatePresence for smooth route transitions */}
             <div className="flex-grow z-10 relative pt-20">
-                <AnimatePresence mode='wait'>
-                    <motion.div
-                        key={location.pathname}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.3 }}
-                        className="w-full"
-                    >
-                        <Outlet />
-                    </motion.div>
-                </AnimatePresence>
+                <Outlet />
             </div>
 
             <Footer />
