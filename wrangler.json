@@ -5,5 +5,24 @@
     "assets": {
         "directory": "./dist",
         "binding": "ASSETS"
-    }
+    },
+    "d1_databases": [
+        {
+            "binding": "DB",
+            "database_name": "fytaal-db",
+            "database_id": "LOCALLY_MANAGED"
+        }
+    ],
+    "r2_buckets": [
+        {
+            "binding": "MEDIA",
+            "bucket_name": "fytaal-media"
+        }
+    ],
+    "routes": [
+        {
+            "pattern": "/*",
+            "zone_name": "fytaal.com"
+        }
+    ]
 }
