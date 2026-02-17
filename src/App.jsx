@@ -18,9 +18,12 @@ import PageEditor from './admin/PageEditor';
 import CompanySettings from './admin/CompanySettings';
 import { pageStructures } from './admin/pageStructures';
 
+import ScrollToTop from './components/ScrollToTop';
+
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/baaslogin" element={<Login />} />
 
