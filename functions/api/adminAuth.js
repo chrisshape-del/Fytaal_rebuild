@@ -113,3 +113,36 @@ export async function onRequestPost({ request, env }) {
         return new Response(JSON.stringify({ error: err.message }), { status: 500 });
     }
 }
+
+export async function onRequestGet({ request, env }) {
+    try {
+        const cookieHeader = request.headers.get('Cookie') || '';
+        const cookies = parse(cookieHeader);
+        const sessionId = cookies.auth_session;
+
+        if (!sessionId) {
+            return new Response(JSON.stringify({ authenticated: false }), { status: 401 });
+        }
+
+        const session = await env.DB.prepare(`
+            SELECT Sessions.*, AdminUser.username 
+            FROM Sessions 
+            JOIN AdminUser ON Sessions.user_id = AdminUser.id
+            WHERE Sessions.id = ? AND Sessions.expires_at > datetime('now')
+        `).bind(sessionId).first();
+
+        if (!session) {
+            return new Response(JSON.stringify({ authenticated: false }), { status: 401 });
+        }
+
+        return new Response(JSON.stringify({
+            authenticated: true,
+            user: session.username
+        }), {
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+    } catch (err) {
+        return new Response(JSON.stringify({ error: err.message }), { status: 500 });
+    }
+}

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, FileText, Settings, LogOut, ArrowLeft } from 'lucide-react';
 import { clsx } from 'clsx';
@@ -7,9 +8,27 @@ export default function AdminLayout() {
     const navigate = useNavigate();
 
     const handleLogout = async () => {
-        await fetch('/api/auth', { method: 'DELETE' });
+        await fetch('/api/adminAuth', { method: 'DELETE' }); // Typo fix: /api/auth -> /api/adminAuth if that's the file
         navigate('/baaslogin');
     };
+
+    useEffect(() => {
+        const checkAuth = async () => {
+            // Bypass for local development if needed, but safer to check API
+            if (window.location.hostname === 'localhost') return;
+
+            try {
+                const res = await fetch('/api/adminAuth');
+                if (!res.ok) {
+                    throw new Error('Not authenticated');
+                }
+            } catch (err) {
+                console.log("Not authenticated, redirecting...");
+                navigate('/baaslogin');
+            }
+        };
+        checkAuth();
+    }, [navigate]);
 
     const navItems = [
         { icon: LayoutDashboard, label: "Overzicht", path: "/admin" },
