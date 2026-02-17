@@ -96,5 +96,15 @@ export const pageStructures = {
             title: "Onze Aanpak",
             content: "Wij werken met een unieke 3-fasen methode..."
         }
+    },
+    service_template: {
+        title: "",
+        subtitle: "",
+        image: "",
+        content: [
+            { type: "p", text: "Nieuwe paragraaf" }
+        ],
+        cta: "AFSPRAAK MAKEN",
+        ctaLink: "/contact"
     }
 };

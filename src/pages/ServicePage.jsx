@@ -1,4 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { servicesData } from '../data/services';
 import { CheckCircle2, Star, Shield, Zap } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -12,7 +13,34 @@ export default function ServicePage({ propSlug }) {
     const { scrollY } = useScroll();
     const y = useTransform(scrollY, [0, 500], [0, 200]);
 
-    if (!data) {
+    const [content, setContent] = useState(data); // Initialize with local data as fallback
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchContent = async () => {
+            try {
+                // Fetch dynamic content from DB
+                const response = await fetch(`/api/content/service-${activeSlug}`);
+                if (response.ok) {
+                    const dbData = await response.json();
+                    if (dbData) {
+                        // Merge DB data with local data to ensure structure
+                        setContent(prev => ({ ...prev, ...dbData }));
+                    }
+                }
+            } catch (error) {
+                console.error("Failed to fetch service content:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (activeSlug) {
+            fetchContent();
+        }
+    }, [activeSlug]);
+
+    if (!content) {
         return (
             <div className="min-h-screen flex items-center justify-center text-slate-500">
                 <p>Service niet gevonden: {activeSlug}</p>
@@ -39,7 +67,7 @@ export default function ServicePage({ propSlug }) {
             {/* 1. Cinematic Hero with Grain & Vignette */}
             <section className="relative h-[80vh] flex items-center overflow-hidden">
                 <motion.div style={{ y }} className="absolute inset-0 z-0">
-                    <img src={data.image} alt={data.title} className="w-full h-full object-cover" />
+                    <img src={content.image} alt={content.title} className="w-full h-full object-cover" />
                     {/* Dark gradient overlay for text readability */}
                     <div className="absolute inset-0 bg-gradient-to-t from-primary-dark via-primary-dark/40 to-transparent" />
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#082F26_90%)] mix-blend-multiply opacity-80" />
@@ -59,7 +87,7 @@ export default function ServicePage({ propSlug }) {
                                 variants={reveal}
                                 className="inline-block px-4 py-1 border border-accent/30 rounded-full text-accent font-bold tracking-[0.2em] uppercase mb-6 bg-primary-dark/50 backdrop-blur-sm"
                             >
-                                {data.subtitle}
+                                {content.subtitle}
                             </motion.span>
 
                             <motion.h1
@@ -67,12 +95,12 @@ export default function ServicePage({ propSlug }) {
                                 variants={reveal}
                                 className="text-6xl md:text-8xl lg:text-9xl font-heading font-black text-white leading-[0.9] mb-8 drop-shadow-2xl"
                             >
-                                {data.title}
+                                {content.title}
                             </motion.h1>
 
                             <motion.div custom={2} variants={reveal} className="flex flex-wrap gap-4">
                                 <span className="text-white/80 font-serif italic text-xl md:text-2xl">
-                                    Ervaar de kracht van <span className="text-accent">{data.title.toLowerCase()}</span>
+                                    Ervaar de kracht van <span className="text-accent">{content.title.toLowerCase()}</span>
                                 </span>
                             </motion.div>
                         </motion.div>
@@ -99,7 +127,7 @@ export default function ServicePage({ propSlug }) {
                                     viewport={{ once: true }}
                                     className="prose prose-lg prose-slate max-w-none"
                                 >
-                                    {data.content.map((block, index) => {
+                                    {content.content.map((block, index) => {
                                         switch (block.type) {
                                             case 'p': return <p key={index} className="text-slate-600 leading-relaxed mb-6 font-sans text-lg">{block.text}</p>;
                                             case 'bold': return <p key={index} className="font-heading font-bold text-2xl text-primary-dark mb-6">{block.text}</p>;
@@ -150,7 +178,7 @@ export default function ServicePage({ propSlug }) {
                                     <Star className="w-12 h-12 text-accent mb-6" />
 
                                     <h3 className="text-3xl font-bold font-heading text-white mb-2">
-                                        Start met {data.title}
+                                        Start met {content.title}
                                     </h3>
                                     <div className="w-12 h-1 bg-accent rounded-full mb-6" />
 
@@ -159,8 +187,8 @@ export default function ServicePage({ propSlug }) {
                                     </p>
 
                                     <div className="space-y-4">
-                                        <MagneticButton to={data.ctaLink || "/contact"} className="w-full justify-center !text-base">
-                                            {data.cta}
+                                        <MagneticButton to={content.ctaLink || "/contact"} className="w-full justify-center !text-base">
+                                            {content.cta}
                                         </MagneticButton>
                                     </div>
 

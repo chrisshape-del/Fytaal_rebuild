@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import ServicePage from './pages/ServicePage';
@@ -34,6 +34,7 @@ function App() {
           <Route path="pages/aanbod" element={<PageEditor pageId="aanbod" initialStructure={pageStructures.aanbod} />} />
           <Route path="pages/team" element={<PageEditor pageId="team" initialStructure={pageStructures.team} />} />
           <Route path="pages/aanpak" element={<PageEditor pageId="aanpak" initialStructure={pageStructures.aanpak} />} />
+          <Route path="pages/service/:slug" element={<ServicePageEditor />} />
 
           {/* Catch-all for admin */}
           <Route path="*" element={<Dashboard />} />
@@ -63,6 +64,11 @@ function App() {
 
 const ServicePageWrapper = ({ slug }) => {
   return <ServicePage propSlug={slug} />;
+};
+
+const ServicePageEditor = () => {
+  const { slug } = useParams();
+  return <PageEditor pageId={`service-${slug}`} initialStructure={pageStructures.service_template} />;
 };
 
 export default App;

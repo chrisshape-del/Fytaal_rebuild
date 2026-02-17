@@ -3,6 +3,7 @@ import { FileText, Settings, ArrowRight, LayoutGrid, List } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+import { servicesData } from '../data/services';
 
 export default function Dashboard() {
     return (
@@ -102,6 +103,23 @@ export default function Dashboard() {
                                                 <List className="w-5 h-5 text-slate-500 group-hover:text-primary" />
                                             </div>
                                             <span className="font-semibold text-lg">{page}</span>
+                                            <ArrowRight className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        </Button>
+                                    </Link>
+                                ))}
+
+                                {/* Service Pages Divider */}
+                                <div className="md:col-span-2 lg:col-span-3 mt-4 mb-2">
+                                    <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider">Diensten</h3>
+                                </div>
+
+                                {Object.keys(servicesData).map((slug) => (
+                                    <Link key={slug} to={`/admin/pages/service/${slug}`}>
+                                        <Button variant="outline" className="w-full h-auto py-4 justify-start px-6 hover:border-primary hover:text-primary transition-all group">
+                                            <div className="bg-blue-50 p-2 rounded-md mr-4 group-hover:bg-primary/10">
+                                                <List className="w-5 h-5 text-blue-500 group-hover:text-primary" />
+                                            </div>
+                                            <span className="font-semibold text-lg capitalize">{slug.replace(/-/g, ' ')}</span>
                                             <ArrowRight className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
                                         </Button>
                                     </Link>

@@ -118,6 +118,14 @@ const FieldRenderer = ({ label, value, onChange, onMediaClick, level = 0 }) => {
                         <div className="relative group w-full aspect-video bg-slate-100 rounded-lg overflow-hidden border border-slate-200">
                             {value.match(/\.(mp4|webm|mov)$/i) ? (
                                 <video src={value} className="w-full h-full object-cover" muted loop playsInline />
+                            ) : value.includes('youtube.com/embed') ? (
+                                <iframe
+                                    src={value}
+                                    className="w-full h-full"
+                                    allow="autoplay; encrypted-media"
+                                    allowFullScreen
+                                    title="Video preview"
+                                />
                             ) : (
                                 <>
                                     <img
@@ -125,8 +133,13 @@ const FieldRenderer = ({ label, value, onChange, onMediaClick, level = 0 }) => {
                                         alt="Preview"
                                         className="w-full h-full object-cover transition-transform group-hover:scale-105"
                                         onError={(e) => {
+                                            // If the URL uses /api/media-proxy/, try direct path as fallback
+                                            if (value.includes('/api/media-proxy/') && !e.target.dataset.triedFallback) {
+                                                e.target.dataset.triedFallback = 'true';
+                                                e.target.src = '/' + value.split('/api/media-proxy/')[1];
+                                                return;
+                                            }
                                             e.target.style.display = 'none';
-                                            // Show the fallback sibling
                                             e.target.nextElementSibling.style.display = 'flex';
                                         }}
                                     />
@@ -211,19 +224,24 @@ export default function PageEditor({ pageId, initialStructure }) {
     }, [pageId]);
 
     const fetchContent = async () => {
+        if (!pageId) return;
         setLoading(true);
         try {
             console.log(`Fetching /api/content/${pageId}`);
             const res = await fetch(`/api/content/${pageId}`);
-            if (!res.ok) throw new Error('Failed to fetch');
 
-            const data = await res.json();
-            // Merge DB data with initial structure to ensure all sections (new or old) are present
+            let data = null;
+            if (res.ok) {
+                data = await res.json();
+            }
+
             if (data) {
-                // We use initialStructure as base and overwrite with DB data
-                // This ensures if we add new sections to code, they show up in admin even if DB is old
+                // Merge DB data with initial structure
+                // For service pages, we might not have initialStructure populated fully if it's a new page
+                // So we fallback to default service_template if needed, or just use data
                 setContent({ ...initialStructure, ...data });
             } else {
+                // If no data in DB, use initial structure
                 setContent(initialStructure);
             }
         } catch (err) {
