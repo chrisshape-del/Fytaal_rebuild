@@ -1,34 +1,116 @@
-import React, { useState } from 'react';
-import { MoveRight, Phone, Mail, MapPin, Clock, Star, Quote, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { MoveRight, Phone, Mail, MapPin, Clock, Star, Calendar, MessageSquare } from 'lucide-react';
+import { motion } from 'framer-motion';
+import BookingModal from '../components/BookingModal';
+import ReviewMarquee from '../components/ReviewMarquee';
 
-const reviews = [
+
+
+// Default reviews if fetch fails or initially
+const DEFAULT_REVIEWS = [
     {
         name: 'Gerard Born',
-        text: 'Ben op zoek gegaan naar fitnesscentrum om gezondheid te stimuleren en niet aan de medicijnen te hoeven na diagnose diabetes 2. En ik ben uitgekomen bij Fytaal. Eerst een personal coach gehad, waar het zeer prettig mee werken was. Afwisselende opdrachten en vooral een duidelijke visie op wat we wilden bereiken. Na de zomer overgestapt naar circuit plus in een groep. Ook daar deskundige en enthousiaste trainers en een afwisselend programma. Gevolg ik voel mij duidelijk vitaler en mijn gezondheid is duidelijk verbeterd (zichtbaar in halfjaarlijkse controles). Dat stimuleert om te blijven trainen bij Fytaal.',
+        text: 'Ben op zoek gegaan naar fitnesscentrum om gezondheid te stimuleren...',
         rating: 5,
         date: '4 maanden geleden'
     },
     {
         name: 'Peter Velsen',
-        text: 'Super combinatie van persoonlijke aandacht door de kleine groepen en het groepsgevoel wat je helpt op te komen dagen en je grenzen te verleggen. Goede en laagdrempelige sfeer en professionele en gedreven begeleiding door Koen en Lesly. Na anderhalf jaar nog super tevreden!',
+        text: 'Super combinatie van persoonlijke aandacht door de kleine groepen...',
         rating: 5,
         date: '9 maanden geleden'
-    },
-    {
-        name: 'Denise Boon',
-        text: 'Ik had nooit gedacht dat ik ooit in een Personal Gym zou trainen. En nu doe ik het 2x in de week in alle vroegte met een grote lach op mijn gezicht! Omdat ik hoofdklasse competitie golf speel, wil ik altijd het beste uit mezelf halen. Daarom heb ik dit jaar besloten om ook mijn lichaam hier zo optimaal mogelijk op voor te bereiden. Ik wil sterker zijn en heb daarom de hulp van Doriene ingeschakeld. Doriene weet waar ze het over heeft. Ze kan goed schakelen als het even anders loopt, zoals met een blessure en maakt iedere keer weer oefeningen op maat die aansluiten bij mijn doel, maar juist ook bij hoe mijn lichaam reageert. Op maat dus. En dat is top en uniek. Veel dank Doriene!',
-        rating: 5,
-        date: '1 jaar geleden'
     }
 ];
 
 export default function Contact() {
-    const [selectedReview, setSelectedReview] = useState(null);
+    const [content, setContent] = useState(null);
+    const [isBookingOpen, setIsBookingOpen] = useState(false);
+    const formRef = useRef(null);
+
+    const scrollToForm = () => {
+        formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+
+    useEffect(() => {
+        const fetchContent = async () => {
+            try {
+                const res = await fetch('/api/content/contact');
+                if (res.ok) {
+                    const data = await res.json();
+                    setContent(data);
+                }
+            } catch (error) {
+                console.error("Failed to fetch contact content:", error);
+            }
+        };
+        fetchContent();
+    }, []);
+
+    const heroTitle = content?.hero?.title || "Zin om van start te gaan?";
+    const heroSubtitle = content?.hero?.subtitle || "Heb je vragen over onze aanpak of wil je direct een kennismaking plannen? Stefan & Marco staan voor je klaar.";
+    const email = content?.info?.email || "info@fytaal.nl";
+    const phone = content?.info?.phone || "06 20 63 68 08";
+    const address = content?.info?.address || "Amsterdamsestraatweg 21, 3744 MA Baarn";
+    const reviews = content?.reviews || DEFAULT_REVIEWS;
+
+    const bookingCardTitle = content?.decisionCards?.bookingCard?.title || "Kennismakingsgesprek boeken";
+    const bookingCardSubtitle = content?.decisionCards?.bookingCard?.subtitle || "Gratis en vrijblijvend · 30 minuten · Op locatie";
+    const bookingCardButton = content?.decisionCards?.bookingCard?.buttonText || "Plan direct in";
+
+    const messageCardTitle = content?.decisionCards?.messageCard?.title || "Stuur ons een bericht";
+    const messageCardSubtitle = content?.decisionCards?.messageCard?.subtitle || "Stel je vraag via het formulier · Reactie binnen 24 uur";
+    const messageCardButton = content?.decisionCards?.messageCard?.buttonText || "Ga naar formulier";
 
     return (
         <div className="bg-white min-h-screen pt-32 pb-20 overflow-x-hidden">
             <div className="max-w-7xl mx-auto px-4">
+
+                {/* Decision Cards */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16"
+                >
+                    {/* Card 1: Boek een kennismakingsgesprek */}
+                    <button
+                        onClick={() => setIsBookingOpen(true)}
+                        className="group text-left bg-white border-2 border-primary/20 hover:border-primary rounded-3xl p-8 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 relative overflow-hidden"
+                    >
+                        <div className="absolute top-0 left-0 w-1.5 h-full bg-primary rounded-l-3xl" />
+                        <div className="flex items-start gap-5">
+                            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-300">
+                                <Calendar className="w-6 h-6 text-primary group-hover:text-white transition-colors duration-300" />
+                            </div>
+                            <div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-1">{bookingCardTitle}</h3>
+                                <p className="text-slate-500 text-sm mb-4">{bookingCardSubtitle}</p>
+                                <span className="inline-flex items-center gap-2 text-primary font-bold text-sm group-hover:gap-3 transition-all">
+                                    {bookingCardButton} <MoveRight className="w-4 h-4" />
+                                </span>
+                            </div>
+                        </div>
+                    </button>
+
+                    {/* Card 2: Stuur een bericht */}
+                    <button
+                        onClick={scrollToForm}
+                        className="group text-left bg-white border-2 border-slate-100 hover:border-slate-300 rounded-3xl p-8 transition-all duration-300 hover:shadow-xl hover:shadow-slate-100"
+                    >
+                        <div className="flex items-start gap-5">
+                            <div className="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center shrink-0 group-hover:bg-slate-200 transition-colors duration-300">
+                                <MessageSquare className="w-6 h-6 text-slate-500" />
+                            </div>
+                            <div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-1">{messageCardTitle}</h3>
+                                <p className="text-slate-500 text-sm mb-4">{messageCardSubtitle}</p>
+                                <span className="inline-flex items-center gap-2 text-slate-600 font-bold text-sm group-hover:gap-3 transition-all">
+                                    {messageCardButton} <MoveRight className="w-4 h-4" />
+                                </span>
+                            </div>
+                        </div>
+                    </button>
+                </motion.div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
                     {/* Contact Info & Text */}
@@ -46,10 +128,9 @@ export default function Contact() {
                             <span className="font-bold text-sm">5.0 ★ Google Rating (52 reviews)</span>
                         </div>
 
-                        <h1 className="text-6xl font-serif font-black text-slate-900 mb-8 leading-[1.1]">Zin om van start te gaan?</h1>
+                        <h1 className="text-6xl font-serif font-black text-slate-900 mb-8 leading-[1.1]">{heroTitle}</h1>
                         <p className="text-xl text-slate-600 mb-12 leading-relaxed max-w-xl">
-                            Heb je vragen over onze aanpak of wil je direct een kennismaking plannen?
-                            Stefan & Marco staan voor je klaar.
+                            {heroSubtitle}
                         </p>
 
                         <div className="space-y-8 mb-12">
@@ -57,9 +138,9 @@ export default function Contact() {
                                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-colors group-hover:bg-primary group-hover:text-white">
                                     <Phone className="w-6 h-6" />
                                 </div>
-                                <a href="tel:0620636808" className="block">
+                                <a href={`tel:${phone.replace(/\s/g, '')}`} className="block">
                                     <h4 className="font-bold text-lg text-slate-900">Bellen of Appen</h4>
-                                    <p className="text-slate-600 hover:text-primary transition-colors">06 20 63 68 08</p>
+                                    <p className="text-slate-600 hover:text-primary transition-colors">{phone}</p>
                                 </a>
                             </div>
 
@@ -67,9 +148,9 @@ export default function Contact() {
                                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-colors group-hover:bg-primary group-hover:text-white">
                                     <Mail className="w-6 h-6" />
                                 </div>
-                                <a href="mailto:info@fytaal.nl" className="block">
+                                <a href={`mailto:${email}`} className="block">
                                     <h4 className="font-bold text-lg text-slate-900">Mailen</h4>
-                                    <p className="text-slate-600 hover:text-primary transition-colors">info@fytaal.nl</p>
+                                    <p className="text-slate-600 hover:text-primary transition-colors">{email}</p>
                                 </a>
                             </div>
 
@@ -79,7 +160,7 @@ export default function Contact() {
                                 </div>
                                 <div>
                                     <h4 className="font-bold text-lg text-slate-900">Langskomen</h4>
-                                    <p className="text-slate-600">Amsterdamsestraatweg 21, 3744 MA Baarn</p>
+                                    <p className="text-slate-600">{address}</p>
                                     <p className="text-primary text-sm font-semibold mt-1 flex items-center gap-1.5">
                                         <span className="w-1.5 h-1.5 bg-primary rounded-full" />
                                         Gratis Parkeren & Centrale Locatie
@@ -91,6 +172,7 @@ export default function Contact() {
 
                     {/* Form */}
                     <motion.div
+                        ref={formRef}
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
@@ -157,84 +239,13 @@ export default function Contact() {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {reviews.map((review, index) => (
-                            <motion.div
-                                key={review.name}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                onClick={() => setSelectedReview(review)}
-                                className="bg-neutral-50/50 p-8 rounded-[2rem] border border-slate-50 relative group cursor-pointer hover:bg-white hover:border-slate-200 hover:shadow-2xl hover:shadow-slate-200/50 transition-all duration-500"
-                            >
-                                <Quote className="absolute top-8 right-8 w-12 h-12 text-slate-100 group-hover:text-primary/5 transition-colors" />
-                                <div className="flex text-amber-500 mb-6">
-                                    {[...Array(review.rating)].map((_, i) => (
-                                        <Star key={i} className="w-4 h-4 fill-current" />
-                                    ))}
-                                </div>
-                                <p className="text-slate-600 mb-8 italic leading-relaxed text-lg line-clamp-4">
-                                    "{review.text}"
-                                </p>
-                                <div className="flex items-center justify-between border-t border-slate-100 pt-6">
-                                    <span className="font-black text-slate-900 text-lg uppercase tracking-tight">{review.name}</span>
-                                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">{review.date}</span>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
+                    <ReviewMarquee reviews={reviews} />
                 </motion.div>
             </div>
 
-            {/* Review Modal */}
-            <AnimatePresence>
-                {selectedReview && (
-                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            onClick={() => setSelectedReview(null)}
-                            className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
-                        />
-                        <motion.div
-                            layoutId={selectedReview.name}
-                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
-                            animate={{ scale: 1, opacity: 1, y: 0 }}
-                            exit={{ scale: 0.9, opacity: 0, y: 20 }}
-                            className="bg-white max-w-2xl w-full rounded-[3rem] p-10 md:p-14 relative z-10 shadow-2xl overflow-hidden"
-                        >
-                            <button
-                                onClick={() => setSelectedReview(null)}
-                                className="absolute top-8 right-8 w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-slate-100 hover:text-slate-900 transition-colors"
-                            >
-                                <X className="w-6 h-6" />
-                            </button>
-
-                            <Quote className="absolute -top-10 -left-10 w-40 h-40 text-slate-50 -z-10 opacity-50" />
-
-                            <div className="flex text-amber-500 mb-8">
-                                {[...Array(selectedReview.rating)].map((_, i) => (
-                                    <Star key={i} className="w-6 h-6 fill-current" />
-                                ))}
-                            </div>
-
-                            <p className="text-xl md:text-2xl text-slate-600 mb-10 italic leading-relaxed font-medium">
-                                "{selectedReview.text}"
-                            </p>
-
-                            <div className="flex items-center justify-between border-t border-slate-100 pt-8">
-                                <div>
-                                    <h5 className="font-black text-slate-900 text-xl md:text-2xl uppercase tracking-tighter">{selectedReview.name}</h5>
-                                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1 block px-2 py-0.5 bg-slate-50 rounded-full w-fit">Geverifieerde Klant</span>
-                                </div>
-                                <span className="text-sm font-bold text-slate-400 uppercase tracking-widest">{selectedReview.date}</span>
-                            </div>
-                        </motion.div>
-                    </div>
-                )}
-            </AnimatePresence>
+            {/* Booking Modal */}
+            {/* Booking Modal */}
+            <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
         </div>
     );
 }

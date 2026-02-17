@@ -1,7 +1,30 @@
+import { useState, useEffect } from 'react';
 import Timeline from '../components/Timeline';
 import { motion } from 'framer-motion';
 
 export default function Approach() {
+    const [content, setContent] = useState(null);
+
+    useEffect(() => {
+        const fetchContent = async () => {
+            try {
+                const res = await fetch('/api/content/aanpak');
+                if (res.ok) {
+                    const data = await res.json();
+                    setContent(data);
+                }
+            } catch (error) {
+                console.error("Failed to fetch approach content:", error);
+            }
+        };
+        fetchContent();
+    }, []);
+
+    const heroTitle = content?.hero?.title || "Onze Aanpak";
+    const heroSubtitle = content?.hero?.subtitle || "Bij Fytaal werken we niet met quick fixes. Wij geloven in een structurele aanpak waarin we stap voor stap toewerken naar een duurzaam resultaat.";
+    const phases = content?.phases;
+    const extraContent = content?.extra_content;
+
     return (
         <div className="pt-20">
             {/* Minimal Hero for Approach Page */}
@@ -16,26 +39,23 @@ export default function Approach() {
                         animate={{ opacity: 1, y: 0 }}
                         className="text-5xl md:text-7xl font-heading font-black mb-6"
                     >
-                        Onze Aanpak
+                        {heroTitle}
                     </motion.h1>
                     <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                        Bij Fytaal werken we niet met quick fixes. Wij geloven in een structurele aanpak
-                        waarin we stap voor stap toewerken naar een duurzaam resultaat.
+                        {heroSubtitle}
                     </p>
                 </div>
             </section>
 
             {/* The Timeline Component */}
-            <Timeline />
+            <Timeline phases={phases} />
 
-            {/* Extra Content - Could be expanded later based on brainstorm */}
+            {/* Extra Content */}
             <section className="py-20 px-4 bg-white">
                 <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-3xl font-heading font-bold mb-6">Waarom deze 5 fases?</h2>
+                    <h2 className="text-3xl font-heading font-bold mb-6">{extraContent?.title || "Waarom deze 5 fases?"}</h2>
                     <p className="text-slate-600 text-lg leading-relaxed">
-                        Veel trajecten stranden omdat er stappen worden overgeslagen. Door eerst te focussen op herstel
-                        en belastbaarheid (Fase 1 & 2), bouwen we een fundament waarop je veilig kracht kunt opbouwen (Fase 3).
-                        Pas daarna is het zinvol om te focussen op maximale vitaliteit en performance (Fase 4 & 5).
+                        {extraContent?.description || "Veel trajecten stranden omdat er stappen worden overgeslagen. Door eerst te focussen op herstel en belastbaarheid (Fase 1 & 2), bouwen we een fundament waarop je veilig kracht kunt opbouwen (Fase 3). Pas daarna is het zinvol om te focussen op maximale vitaliteit en performance (Fase 4 & 5)."}
                     </p>
                 </div>
             </section>

@@ -34,6 +34,7 @@ export default function AdminLayout() {
         { icon: LayoutDashboard, label: "Overzicht", path: "/admin" },
         { icon: FileText, label: "Home", path: "/admin/pages/home" },
         { icon: FileText, label: "Aanbod", path: "/admin/pages/aanbod" },
+        { icon: FileText, label: "Reform", path: "/admin/pages/reform" },
         { icon: FileText, label: "Team", path: "/admin/pages/team" },
         { icon: FileText, label: "Aanpak", path: "/admin/pages/aanpak" },
         { icon: Settings, label: "Instellingen", path: "/admin/settings" },

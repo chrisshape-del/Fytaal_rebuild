@@ -8,7 +8,7 @@ import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 
 // Recursive Field Renderer
-const FieldRenderer = ({ label, value, onChange, onMediaClick, level = 0 }) => {
+const FieldRenderer = ({ label, value, onChange, onMediaClick, level = 0, template }) => {
     const [expanded, setExpanded] = useState(true);
 
     // 1. Handle Objects (Nested Sections)
@@ -35,6 +35,7 @@ const FieldRenderer = ({ label, value, onChange, onMediaClick, level = 0 }) => {
                                 }}
                                 onMediaClick={onMediaClick}
                                 level={level + 1}
+                                template={template?.[key]}
                             />
                         ))}
                     </div>
@@ -54,9 +55,23 @@ const FieldRenderer = ({ label, value, onChange, onMediaClick, level = 0 }) => {
                         size="sm"
                         onClick={() => {
                             // Clone the first item structure or create an empty object if empty
-                            const newItem = value.length > 0 ? JSON.parse(JSON.stringify(value[0])) : {};
-                            // Reset values in new item
-                            Object.keys(newItem).forEach(k => newItem[k] = "");
+                            let newItem = {};
+                            if (value.length > 0) {
+                                newItem = JSON.parse(JSON.stringify(value[0]));
+                            } else if (template && Array.isArray(template) && template.length > 0) {
+                                newItem = JSON.parse(JSON.stringify(template[0]));
+                            }
+
+                            // Reset values in new item (keep keys)
+                            const resetValues = (obj) => {
+                                Object.keys(obj).forEach(k => {
+                                    if (typeof obj[k] === 'string') obj[k] = "";
+                                    else if (Array.isArray(obj[k])) obj[k] = []; // Reset arrays to empty
+                                    else if (typeof obj[k] === 'object' && obj[k] !== null) resetValues(obj[k]);
+                                });
+                            };
+                            resetValues(newItem);
+
                             onChange([...value, newItem]);
                         }}
                         className="h-8"
@@ -93,6 +108,7 @@ const FieldRenderer = ({ label, value, onChange, onMediaClick, level = 0 }) => {
                                     }}
                                     onMediaClick={onMediaClick}
                                     level={level + 1}
+                                    template={template?.[0]}
                                 />
                             </div>
                         </Card>
@@ -223,6 +239,29 @@ export default function PageEditor({ pageId, initialStructure }) {
         fetchContent();
     }, [pageId]);
 
+    // Deep Merge Utility
+    const deepMerge = (target, source) => {
+        const output = { ...target };
+        if (isObject(target) && isObject(source)) {
+            Object.keys(source).forEach(key => {
+                if (isObject(source[key])) {
+                    if (!(key in target)) {
+                        Object.assign(output, { [key]: source[key] });
+                    } else {
+                        output[key] = deepMerge(target[key], source[key]);
+                    }
+                } else {
+                    Object.assign(output, { [key]: source[key] });
+                }
+            });
+        }
+        return output;
+    };
+
+    const isObject = (item) => {
+        return (item && typeof item === 'object' && !Array.isArray(item));
+    }
+
     const fetchContent = async () => {
         if (!pageId) return;
         setLoading(true);
@@ -236,10 +275,9 @@ export default function PageEditor({ pageId, initialStructure }) {
             }
 
             if (data) {
-                // Merge DB data with initial structure
-                // For service pages, we might not have initialStructure populated fully if it's a new page
-                // So we fallback to default service_template if needed, or just use data
-                setContent({ ...initialStructure, ...data });
+                // Deep merge DB data with initial structure
+                // Priorities: DB data overwrites Initial Structure, but Initial Structure defaults are kept if missing in DB
+                setContent(deepMerge(initialStructure, data));
             } else {
                 // If no data in DB, use initial structure
                 setContent(initialStructure);
@@ -312,6 +350,7 @@ export default function PageEditor({ pageId, initialStructure }) {
                             onChange={(newValue) => setContent(prev => ({ ...prev, [key]: newValue }))}
                             onMediaClick={handleMediaClick}
                             level={0}
+                            template={initialStructure?.[key]}
                         />
                     ))
                 ) : (

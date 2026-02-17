@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { clsx } from 'clsx';
 import { Quote, ArrowRight, X } from 'lucide-react';
@@ -60,6 +60,32 @@ const teamMembers = [
 
 export default function Team() {
     const containerRef = useRef(null);
+    const [content, setContent] = useState(null);
+
+    useEffect(() => {
+        const fetchContent = async () => {
+            try {
+                const res = await fetch('/api/content/team');
+                if (res.ok) {
+                    const data = await res.json();
+                    setContent(data);
+                }
+            } catch (error) {
+                console.error("Failed to fetch team content:", error);
+            }
+        };
+        fetchContent();
+    }, []);
+
+    // Fallback to hardcoded if no content yet (or while loading)
+    // Actually, let's use a safe default if content is missing but we want to show something?
+    // Or just wait. Let's merge active content with defaults if needed, 
+    // but here we can just use `content || defaultData` pattern if we export defaultData.
+    // For now, let's use the fetched content variables.
+
+    const heroTitle = content?.hero?.title || "Ons Team";
+    const heroSubtitle = content?.hero?.subtitle || "Maak kennis met de experts die jou helpen je doelen te bereiken. De drijvende kracht achter Fytaal.";
+    const members = content?.teamMembers || teamMembers;
 
     return (
         <div ref={containerRef} className="bg-surface-DEFAULT min-h-screen">
@@ -72,7 +98,7 @@ export default function Team() {
                         transition={{ duration: 0.8 }}
                         className="text-6xl md:text-8xl font-heading font-black text-primary-dark mb-6"
                     >
-                        Ons Team
+                        {heroTitle}
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0 }}
@@ -80,8 +106,7 @@ export default function Team() {
                         transition={{ delay: 0.3, duration: 0.8 }}
                         className="text-xl text-slate-600 max-w-2xl mx-auto font-sans"
                     >
-                        Maak kennis met de experts die jou helpen je doelen te bereiken.
-                        De drijvende kracht achter Fytaal.
+                        {heroSubtitle}
                     </motion.p>
                 </div>
             </section>
@@ -89,7 +114,7 @@ export default function Team() {
             {/* Team Grid */}
             <section className="pb-32 px-4 relative z-10">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 lg:gap-16">
-                    {teamMembers.map((member, index) => (
+                    {members.map((member, index) => (
                         <TeamCard key={index} member={member} index={index} />
                     ))}
                 </div>

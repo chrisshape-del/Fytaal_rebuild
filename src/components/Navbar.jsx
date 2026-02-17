@@ -3,10 +3,12 @@ import { Link, NavLink } from 'react-router-dom';
 import { MoveRight } from 'lucide-react';
 import { clsx } from 'clsx';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import BookingModal from './BookingModal';
 
 export default function Navbar() {
     const { scrollY } = useScroll();
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isBookingOpen, setIsBookingOpen] = useState(false);
 
     // Dynamic styles based on scroll
     const width = useTransform(scrollY, [0, 100], ["90%", "80%"]);
@@ -38,12 +40,7 @@ export default function Navbar() {
                     <img
                         src="/Fytaal-Logo-pakket_01-04-e1620634541526-300x300.webp"
                         alt="Fytaal Logo"
-                        className="w-8 h-8 object-contain transition-transform group-hover:rotate-12"
-                    />
-                    <img
-                        src="/fytaal-text-logo.png"
-                        alt="Fytaal"
-                        className="h-8 object-contain"
+                        className="w-16 h-16 object-contain transition-transform group-hover:rotate-12"
                     />
                 </Link>
 
@@ -79,10 +76,21 @@ export default function Navbar() {
                                     className="block py-2 px-4 rounded-xl hover:bg-slate-50 hover:text-primary transition-colors text-sm"
                                 >
                                     {item.name}
+                                    {item.isNew && <span className="ml-2 bg-accent text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">NEW</span>}
                                 </Link>
                             ))}
                         </div>
                     </div>
+
+                    <NavLink to="/reform" className={({ isActive }) => clsx("hover:text-primary transition-colors relative flex items-center gap-1.5", isActive && "text-primary font-bold")}>
+                        {({ isActive }) => (
+                            <>
+                                Re·Form
+                                <span className="text-[9px] bg-accent text-white px-1.5 py-0.5 rounded-full font-bold tracking-wider leading-none">NEW</span>
+                                {isActive && <motion.div layoutId="nav-pill" className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full" />}
+                            </>
+                        )}
+                    </NavLink>
 
                     <NavLink to="/onze-aanpak" className={({ isActive }) => clsx("hover:text-primary transition-colors relative", isActive && "text-primary font-bold")}>
                         {({ isActive }) => (
@@ -113,25 +121,26 @@ export default function Navbar() {
                 </div>
 
                 {/* CTA Button */}
-                <Link
-                    to="/contact"
+                <button
+                    onClick={() => setIsBookingOpen(true)}
                     className="bg-primary text-white px-5 py-2 rounded-full hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-primary/25 flex items-center gap-2 hover:scale-105 active:scale-95 shrink-0 text-sm font-bold"
                 >
-                    Kennismaken <MoveRight className="w-4 h-4" />
-                </Link>
+                    Boek een kennismakingsgesprek <MoveRight className="w-4 h-4" />
+                </button>
             </motion.nav>
 
             {/* Mobile Nav (Simplified for now - fits 'Standard' requirement, but styled to match) */}
             <div className="md:hidden fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md p-4 flex justify-between items-center border-b border-slate-100">
                 <Link to="/" className="flex items-center gap-2">
-                    <img src="/Fytaal-Logo-pakket_01-04-e1620634541526-300x300.webp" alt="Fytaal Logo" className="w-8 h-8 object-contain" />
-                    <img src="/fytaal-text-logo.png" alt="Fytaal" className="h-6 object-contain" />
+                    <img src="/Fytaal-Logo-pakket_01-04-e1620634541526-300x300.webp" alt="Fytaal Logo" className="w-16 h-16 object-contain" />
                 </Link>
                 <button className="p-2 text-slate-800">
                     <span className="sr-only">Menu</span>
                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" /></svg>
                 </button>
             </div>
+            {/* Booking Modal */}
+            <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
         </>
     );
 }
