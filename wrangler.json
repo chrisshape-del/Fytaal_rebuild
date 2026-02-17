@@ -1,9 +1,12 @@
 {
-    "name": "fytaal-rebuild",
-    "compatibility_date": "2024-11-01",
-    "main": "src/worker.js",
-    "assets": {
-        "directory": "./dist",
-        "binding": "ASSETS"
-    }
+	"name": "fytaal-admin-preview",
+	"compatibility_date": "2024-11-01",
+	"pages_build_output_dir": "./dist",
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "fytaal-db",
+			"database_id": "aa74158c-a876-4465-9086-b135054a2f89"
+		}
+	]
 }

@@ -78,8 +78,8 @@ export default function Timeline() {
                                     className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                                 />
                                 <div className={`absolute inset-0 transition-opacity duration-300 ${activeId === phase.id
-                                        ? 'bg-gradient-to-b from-primary-dark/30 via-primary-dark/60 to-primary-dark/90'
-                                        : 'bg-primary-dark/60 hover:bg-primary-dark/40'
+                                    ? 'bg-gradient-to-b from-primary-dark/30 via-primary-dark/60 to-primary-dark/90'
+                                    : 'bg-primary-dark/60 hover:bg-primary-dark/40'
                                     }`} />
                             </div>
 
