@@ -96,7 +96,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                {['Home', 'Aanbod', 'Team', 'Aanpak', 'Contact', 'Rooster'].map((page) => (
+                                {['Home', 'Aanbod', 'Reform', 'Team', 'Aanpak', 'Contact', 'Rooster'].map((page) => (
                                     <Link key={page} to={`/admin/pages/${page.toLowerCase()}`}>
                                         <Button variant="outline" className="w-full h-auto py-4 justify-start px-6 hover:border-primary hover:text-primary transition-all group">
                                             <div className="bg-slate-100 p-2 rounded-md mr-4 group-hover:bg-primary/10">
@@ -113,7 +113,7 @@ export default function Dashboard() {
                                     <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider">Diensten</h3>
                                 </div>
 
-                                {Object.keys(servicesData).map((slug) => (
+                                {Object.keys(servicesData).filter(slug => slug !== 'rooster').map((slug) => (
                                     <Link key={slug} to={`/admin/pages/service/${slug}`}>
                                         <Button variant="outline" className="w-full h-auto py-4 justify-start px-6 hover:border-primary hover:text-primary transition-all group">
                                             <div className="bg-blue-50 p-2 rounded-md mr-4 group-hover:bg-primary/10">

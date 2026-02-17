@@ -7,6 +7,7 @@ import Team from './pages/Team';
 import Contact from './pages/Contact';
 import Approach from './pages/Approach';
 import SchedulePage from './pages/SchedulePage';
+import Reform from './pages/Reform';
 
 // Admin Imports
 import Login from './admin/Login';
@@ -32,8 +33,11 @@ function App() {
           {/* Generic Page Editors */}
           <Route path="pages/home" element={<PageEditor pageId="home" initialStructure={pageStructures.home} />} />
           <Route path="pages/aanbod" element={<PageEditor pageId="aanbod" initialStructure={pageStructures.aanbod} />} />
+          <Route path="pages/reform" element={<PageEditor pageId="reform" initialStructure={pageStructures.reform} />} />
           <Route path="pages/team" element={<PageEditor pageId="team" initialStructure={pageStructures.team} />} />
           <Route path="pages/aanpak" element={<PageEditor pageId="aanpak" initialStructure={pageStructures.aanpak} />} />
+          <Route path="pages/rooster" element={<PageEditor pageId="rooster" initialStructure={pageStructures.rooster} />} />
+          <Route path="pages/contact" element={<PageEditor pageId="contact" initialStructure={pageStructures.contact} />} />
           <Route path="pages/service/:slug" element={<ServicePageEditor />} />
 
           {/* Catch-all for admin */}
@@ -53,6 +57,7 @@ function App() {
           <Route path="team" element={<Team />} />
           <Route path="contact" element={<Contact />} />
           <Route path="rooster" element={<SchedulePage />} />
+          <Route path="reform" element={<Reform />} />
 
           <Route path="*" element={<div className="min-h-screen py-32 px-4 text-center"><h1 className="text-4xl text-primary font-bold">404</h1><p>Pagina niet gevonden</p></div>} />
         </Route>

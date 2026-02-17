@@ -1,0 +1,10 @@
+{
+  "permission": {
+    "read": {
+      "D:/Forgr Demo's/Fytaal rebuild/.opencode/get-shit-done/*": "allow"
+    },
+    "external_directory": {
+      "D:/Forgr Demo's/Fytaal rebuild/.opencode/get-shit-done/*": "allow"
+    }
+  }
+}

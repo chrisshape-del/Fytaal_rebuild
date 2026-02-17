@@ -1,0 +1,156 @@
+
+import fs from 'fs';
+
+const pagesData = {
+    aanbod: {
+        hero: {
+            title: "ONS AANBOD",
+            subtitle: "Of je nu wilt revalideren, presteren of gewoon lekker wilt bewegen. Wij hebben de expertise en de faciliteiten om jou te helpen."
+        },
+        cta_section: {
+            title: "Bekijk het Rooster",
+            description: "Benieuwd wanneer je favoriete training plaatsvindt? Bekijk ons actuele weekrooster.",
+            buttonText: "Naar het rooster",
+            buttonLink: "/rooster"
+        }
+    },
+    team: {
+        hero: {
+            title: "Ons Team",
+            subtitle: "Maak kennis met de experts die jou helpen je doelen te bereiken. De drijvende kracht achter Fytaal."
+        },
+        teamMembers: [
+            {
+                name: "Doriene Verzijlenberg",
+                role: "Vitaliteitstherapeut",
+                img: "/Doriene-683x1024.webp",
+                link: "/trainer/doriene-verzijlenberg",
+                quote: "Je kunt vaak veel meer dan je zelf denkt.",
+                bio: "Doriene is oprichter en eigenaar van Fytaal. Daarnaast is zij Fysiotherapeut, Personal Trainer en Vitaliteitstherapeut.",
+                detailedBio: [
+                    "Als fysiotherapeut merkte ik dat de lichamelijke klacht van de klant niet altijd op zichzelf staat, maar dat o.a. de leefstijl een belangrijk deel van het probleem én van de oplossing kan zijn.",
+                    "Fytaal is in 2010 opgericht door Doriene Verzijlenberg en is sinds april 2014 gevestigd in het centrum van Baarn. Regelmatig ziek zijn behoort nu tot een ander leven en ik kan alles doen zonder beperkt te worden.",
+                    "Doriene vindt het vooral bijzonder wat het lichaam eigenlijk allemaal kan als je er mee aan de slag gaat. Het samen puzzelen wat voor jou werkt is haar leukste uitdaging."
+                ]
+            },
+            {
+                name: "Lesly Krijnen",
+                role: "Personal Trainer",
+                img: "/Lesly-683x1024.webp",
+                link: "/trainer/lesly-krijnen",
+                quote: "Je wilt altijd meer, en nooit minder, van wat jou sterk maakt!",
+                bio: "Lesly is Personal (Group) trainer en met haar bruisende energie weet ze jou te triggeren net dat stapje harder te zetten.",
+                detailedBio: [
+                    "Lesly weet jou met haar bruisende energie net even dat stapje harder te laten zetten.",
+                    "Lesly heeft vroeger veel sporten gedaan, van paardrijden naar turnen en polefitness. Zij merkte dat zij bij pole fitness kracht mistte en kwam zo in de gym terecht voor krachttraining.",
+                    "Zij is nog elke dag dankbaar dat ze dit werk mag doen en kijkt er naar uit jou te mogen begeleiden."
+                ]
+            },
+            {
+                name: "Peter Hollander",
+                role: "Personal Trainer",
+                img: "/Peter-683x1024.webp",
+                link: "/trainer/peter-hollander",
+                quote: "Hard trainen en de juiste voeding zijn de sleutel tot succes.",
+                bio: "De specialiteit van Peter als Trainer/Coach is het vinden van een training die meer balans geeft aan jouw lijf.",
+                detailedBio: [
+                    "Mijn naam is Peter Hollander. Sinds mijn 15e ben ik al actief bezig met fitnessen. Door mijn vroege start heb ik al 10 jaar ervaring.",
+                    "Mijn kracht ligt in het motiveren en inspireren van mensen. Je ontwikkelt niet alleen je spieren en je conditie, maar werkt ook actief aan je welzijn en geest.",
+                    "Ik geloof niet in een wondermiddel. Hard trainen en de juiste voeding zijn de twee belangrijkste elementen."
+                ]
+            },
+            {
+                name: "Koen 't Hart",
+                role: "Personal Trainer",
+                img: "/Koen-683x1024.webp",
+                link: "/trainer/koen-t-hart",
+                quote: "Gedreven om het beste bij jou naar boven te halen.",
+                bio: "Koen is gedreven om jou te helpen om het beste bij jou naar boven te halen. Hij is personal trainer om jou te helpen jou te zien groeien en jouw doel te laten behalen.",
+                detailedBio: [
+                    "Koen is gedreven om jou te helpen om het beste bij jou naar boven te halen.",
+                    "Hij is personal trainer om jou te helpen jou te zien groeien en jouw doel te laten behalen. Samen werken we aan een sterker lichaam en een sterkere geest."
+                ]
+            }
+        ]
+    },
+    aanpak: {
+        hero: {
+            title: "Onze Aanpak",
+            subtitle: "Bij Fytaal werken we niet met quick fixes. Wij geloven in een structurele aanpak waarin we stap voor stap toewerken naar een duurzaam resultaat."
+        },
+        phases: [
+            {
+                id: '01',
+                title: 'Herstel',
+                description: 'Fysiotherapeutische begeleiding van klacht naar belastbaarheid. Wij analyseren de oorzaak en bouwen een fundering voor herstel.',
+                image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=2070&auto=format&fit=crop'
+            },
+            {
+                id: '02',
+                title: 'Opbouw',
+                description: 'Van revalidatie naar verantwoorde training. Stapsgewijs vergroten we de belasting om terugval te voorkomen.',
+                image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop'
+            },
+            {
+                id: '03',
+                title: 'Kracht',
+                description: 'Fundering leggen voor een sterk en weerbaar lichaam. Krachttraining is essentieel voor lange termijn gezondheid.',
+                image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop'
+            },
+            {
+                id: '04',
+                title: 'Vitaliteit',
+                description: 'Optimaliseren van energie, voeding en leefstijl. Een holistische aanpak voor meer energie in het dagelijks leven.',
+                image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=2070&auto=format&fit=crop'
+            },
+            {
+                id: '05',
+                title: 'Performance',
+                description: 'Topsport begeleiding en grenzen verleggen. Voor wie het maximale uit zichzelf wil halen.',
+                image: 'https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=2069&auto=format&fit=crop'
+            }
+        ],
+        extra_content: {
+            title: "Waarom deze 5 fases?",
+            description: "Veel trajecten stranden omdat er stappen worden overgeslagen. Door eerst te focussen op herstel en belastbaarheid (Fase 1 & 2), bouwen we een fundament waarop je veilig kracht kunt opbouwen (Fase 3). Pas daarna is het zinvol om te focussen op maximale vitaliteit en performance (Fase 4 & 5)."
+        }
+    },
+    rooster: {
+        hero: {
+            title: "Rooster",
+            subtitle: "Bekijk hier wanneer jouw favoriete trainingen zijn."
+        },
+        schedule_info: {
+            title: "Openingstijden",
+            description: "Wij zijn 7 dagen per week geopend. Bekijk hieronder het actuele rooster."
+        }
+    },
+    contact: {
+        hero: {
+            title: "Contact",
+            subtitle: "Neem contact met ons op voor een kennismaking."
+        },
+        info: {
+            email: "info@fytaal.nl",
+            phone: "035-12345678",
+            address: "Adres straat 1, 1234 AB Baarn"
+        }
+    }
+};
+
+const sqlStatements = [];
+
+// Clean up existing content for these pages
+sqlStatements.push(`DELETE FROM Content WHERE id IN ('aanbod', 'team', 'aanpak', 'rooster', 'contact');`);
+
+Object.entries(pagesData).forEach(([pageId, data]) => {
+    const jsonContent = JSON.stringify(data).replace(/'/g, "''"); // Escape single quotes for SQL
+    sqlStatements.push(`INSERT INTO Content (id, data) VALUES ('${pageId}', '${jsonContent}');`);
+});
+
+const sqlContent = sqlStatements.join('\n');
+
+fs.writeFileSync('seed_pages_full.sql', sqlContent);
+
+console.log('Generated seed_pages_full.sql');
+console.log('Run with: npx wrangler d1 execute fytaal-db --local --file=./seed_pages_full.sql');

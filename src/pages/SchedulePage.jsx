@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Search, Bell, ArrowRight, CalendarDays, Calendar, CalendarRange,
     MoreHorizontal, Bookmark, Zap, Eye, Dumbbell, ChevronRight, ChevronLeft,
@@ -58,10 +58,42 @@ const SCHEDULE_DATA = {
     'Zondag': [] // Closed
 };
 
+// Empty structure for initialization
+const INITIAL_SCHEDULE = WEEK_DAYS.reduce((acc, day) => ({ ...acc, [day]: [] }), {});
+
 export default function SchedulePage() {
     const [view, setView] = useState('weekly');
     const [filter, setFilter] = useState('all');
     const [currentDayIndex, setCurrentDayIndex] = useState(todayIndex); // Initialize with actual today
+    const [scheduleData, setScheduleData] = useState(INITIAL_SCHEDULE);
+
+    useEffect(() => {
+        const fetchSchedule = async () => {
+            try {
+                const res = await fetch('/api/content/rooster');
+                const data = await res.json();
+                if (data && data.events) {
+                    const newSchedule = { ...INITIAL_SCHEDULE };
+                    data.events.forEach((event, index) => {
+                        if (!newSchedule[event.day]) newSchedule[event.day] = [];
+                        newSchedule[event.day].push({
+                            id: index,
+                            time: `${event.startTime} - ${event.endTime}`,
+                            title: event.activity,
+                            type: event.type || 'all',
+                            trainer: event.trainer,
+                            status: event.status || 'available',
+                            isWeekend: ['Zaterdag', 'Zondag'].includes(event.day)
+                        });
+                    });
+                    setScheduleData(newSchedule);
+                }
+            } catch (e) {
+                console.error("Failed to fetch schedule", e);
+            }
+        };
+        fetchSchedule();
+    }, []);
 
     const handleNextDay = () => {
         setCurrentDayIndex((prev) => (prev + 1) % WEEK_DAYS.length);
@@ -73,7 +105,7 @@ export default function SchedulePage() {
 
     // Filter Logic
     const getFilteredSessions = (day) => {
-        const sessions = SCHEDULE_DATA[day] || [];
+        const sessions = scheduleData[day] || [];
         if (filter === 'all') return sessions;
         return sessions.filter(session => session.type === filter);
     };

@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 
-const phases = [
+// Keep static phases as default fallback
+const defaultPhases = [
     {
         id: '01',
         title: 'Herstel',
@@ -35,8 +36,12 @@ const phases = [
     }
 ];
 
-export default function Timeline() {
-    const [activeId, setActiveId] = useState('01');
+export default function Timeline({ phases = defaultPhases }) {
+    // If phases prop is passed but activeId state from props is not managed, 
+    // we assume activeId is internal.
+    // If phases come from DB, ensure they have valid IDs or fallback.
+    const activePhases = phases && phases.length > 0 ? phases : defaultPhases;
+    const [activeId, setActiveId] = useState(activePhases[0]?.id || '01');
 
     return (
         <section className="py-24 px-4 bg-surface-DEFAULT relative overflow-hidden">
@@ -61,7 +66,7 @@ export default function Timeline() {
 
                 {/* Desktop Accordion (Horizontal) */}
                 <div className="hidden md:flex h-[600px] w-full gap-4">
-                    {phases.map((phase) => (
+                    {activePhases.map((phase) => (
                         <motion.div
                             key={phase.id}
                             layout
@@ -132,7 +137,7 @@ export default function Timeline() {
 
                 {/* Mobile Accordion (Vertical) */}
                 <div className="md:hidden flex flex-col gap-4">
-                    {phases.map((phase) => (
+                    {activePhases.map((phase) => (
                         <div
                             key={phase.id}
                             onClick={() => setActiveId(activeId === phase.id ? null : phase.id)}

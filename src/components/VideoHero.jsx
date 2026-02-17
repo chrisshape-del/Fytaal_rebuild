@@ -46,7 +46,7 @@ export default function VideoHero({ content }) {
             {/* Hero Content */}
             <div className="relative z-10 text-center px-4 max-w-7xl mx-auto w-full">
                 <motion.div initial="hidden" animate="visible" className="flex flex-col items-center">
-                    <motion.span custom={0} variants={reveal} className="inline-block text-accent-DEFAULT font-bold tracking-[0.4em] mb-8 text-sm md:text-base">
+                    <motion.span custom={0} variants={reveal} className="inline-block text-white font-bold tracking-[0.4em] mb-8 text-sm md:text-base drop-shadow-md">
                         Baarn • Personal Gym • Fysiotherapie
                     </motion.span>
 
@@ -58,7 +58,7 @@ export default function VideoHero({ content }) {
                             <span className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">
                                 {title.split(' ').slice(-1)}
                             </span>
-                            <span className="font-serif italic text-4xl md:text-5xl text-accent-DEFAULT transform translate-y-2">
+                            <span className="font-serif italic text-4xl md:text-5xl text-white drop-shadow-md transform translate-y-2">
                                 {subtitle}
                             </span>
                         </motion.div>
