@@ -31,19 +31,19 @@ export default function ReformAudience({ content }) {
     // Default items fallback
     const defaultItems = [
         {
-            title: "Herstel & Revalidatie",
-            description: "Na een blessure, operatie of fysiotherapie. De reformer biedt een veilige, gecontroleerde manier om kracht en mobiliteit op te bouwen — zonder overbelasting.",
-            tags: ["Na fysio", "Rugklachten", "Schouder/knie herstel"]
+            title: "Sterker & Beter",
+            description: "Voor wie wil werken aan een sterke core en betere houding, of last heeft van (lichte) lichamelijke klachten.",
+            tags: ["Sterke core", "Betere houding", "Klachten verminderen"]
         },
         {
-            title: "Vitaliteit & Balans",
-            description: "Voor wie dagelijks veel zit, stress ervaart of simpelweg fitter wil worden. Reformer Pilates verbetert je houding, flexibiliteit en energie.",
-            tags: ["Kantoorwerk", "Stressklachten", "Houding"]
+            title: "Slimmer Trainen",
+            description: "Voor wie slimmer wil trainen naast krachttraining of hardlopen. Of je nu beginner bent of al sportief, de lessen passen we aan jouw niveau aan.",
+            tags: ["Aanvulling", "Hardlopers", "Krachttraining"]
         },
         {
-            title: "Sport & Performance",
-            description: "Als aanvulling op je sport. Verbeter je core stability, voorkom blessures en vergroot je bewegingsbereik. Veel topsporters trainen op de reformer.",
-            tags: ["Hardlopen", "Tennis", "Cross-training"]
+            title: "Balans & Focus",
+            description: "Voor wie meer balans zoekt tussen trainen, werk en privé. Ga bewuster met je lichaam om in een rustige, fijne boutique sfeer.",
+            tags: ["Mind-body", "Ontspanning", "Boutique vibes"]
         }
     ];
 
@@ -95,11 +95,11 @@ export default function ReformAudience({ content }) {
                             </p>
 
                             {/* Tags */}
-                            <div className="flex flex-wrap gap-2 mt-auto pt-6">
+                            <div className="flex flex-wrap lg:flex-nowrap justify-center sm:justify-start gap-1.5 lg:gap-2 mt-auto pt-6">
                                 {item.tags.map((tag) => (
                                     <span
                                         key={tag}
-                                        className="text-xs px-3 py-1 rounded-full bg-[#F5F1E8] text-[#082F26]/60 font-medium"
+                                        className="text-[10px] lg:text-[11px] xl:text-xs px-2 xl:px-3 py-1 rounded-full bg-[#F5F1E8] text-[#082F26]/60 font-medium whitespace-nowrap"
                                     >
                                         {tag}
                                     </span>

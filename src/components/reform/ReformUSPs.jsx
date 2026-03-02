@@ -2,29 +2,30 @@ import { motion } from 'framer-motion';
 import { Users, Sparkles, Zap, Brain } from 'lucide-react';
 
 export default function ReformUSPs({ content }) {
-    const tag = content?.tag || "Waarom Re·Form?";
-    const title = content?.title || "De Voordelen";
+    const tag = content?.tag || "Re:form x Fytaal";
+    const title = content?.title || "Slim trainen, duurzaam resultaat";
+    const desc = content?.description || "Re:form is onderdeel van Fytaal. Reformer pilates sluit perfect aan op krachttraining, herstel, blessurepreventie en prestatiegericht trainen. Het is geen 'extraatje', maar een slimme aanvulling op je training en leefstijl.";
 
     const defaultItems = [
         {
             id: 1,
-            title: "Low Impact, High Results",
-            description: "Geen schokbelasting op je gewrichten, wel maximale spieropbouw. Veilig voor elk lichaam."
+            title: "Duurzaam trainen",
+            description: "Trainen met een lange termijn visie. Alles wat we doen is gericht op blijvend resultaat en gezondheid."
         },
         {
             id: 2,
-            title: "Exclusieve Aandacht",
-            description: "Kleine groepen (max 4) of privé. Je krijgt de persoonlijke begeleiding die je verdient."
+            title: "Verantwoord sterker worden",
+            description: "Op een veilige, gecontroleerde manier kracht opbouwen, onderbouwd door onze fysio-kennis."
         },
         {
             id: 3,
-            title: "Fysio Expertise",
-            description: "Onderbouwd door medische kennis. Wij weten precies hoe het lichaam beweegt en herstelt."
+            title: "Trainen voor het leven",
+            description: "Bewegingen die je dagelijks leven beter maken, zodat je fitter en pijnvrij blijft."
         },
         {
             id: 4,
-            title: "Mind-Body Connectie",
-            description: "Meer dan trainen. Je leert bewust ademen en focussen. Een reset voor je zenuwstelsel."
+            title: "Slimme aanvulling",
+            description: "Reformer pilates is geen extraatje, maar een perfecte aanvulling op krachttraining of (top)sport."
         }
     ];
 
@@ -44,6 +45,9 @@ export default function ReformUSPs({ content }) {
                     <h2 className="text-4xl md:text-6xl font-heading font-black">
                         {title}
                     </h2>
+                    <p className="mt-6 text-[#F5F1E8]/70 text-lg md:text-xl font-light max-w-2xl mx-auto md:text-center">
+                        {desc}
+                    </p>
                 </div>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">

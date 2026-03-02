@@ -2,10 +2,10 @@ import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 
 export default function ReformHero({ content }) {
-    const tag = content?.tag || "Bewegen vanuit de Fysio";
-    const title = content?.title || "Re·Form";
-    const subtitle = content?.subtitle || "Hervorm je lichaam, reset je geest.";
-    const description = content?.description || "Een fusie van kracht, flexibiliteit en mindfulness op de reformer.";
+    const tag = content?.tag || "Boutique Reformer Pilates Studio bij Fytaal";
+    const title = content?.title || "Re:form";
+    const subtitle = content?.subtitle || "Sterker, soepeler en slimmer bewegen – in een kleine setting, met maximale aandacht.";
+    const description = content?.description || "Re:form: de boutique reformer pilates studio boven Fytaal Personal Gym. Hier draait alles om gecontroleerd bewegen, sterker worden vanuit je core en trainen met aandacht voor jouw lijf. Geen massale lessen (max. 8 deelnemers), wél persoonlijke begeleiding, hoogwaardige reformer-apparatuur en een fijne, rustige sfeer.\n\nRe:form is er voor iedereen die bewuster wil bewegen – of je nu fitter wilt worden, klachten wilt verminderen of je prestaties in sport wilt verbeteren.";
     const buttonText = content?.buttonText || "BOEK EEN LES";
     const subText = content?.subText || "Fytaal Baarn";
     const image = content?.image || "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=2070&auto=format&fit=crop";

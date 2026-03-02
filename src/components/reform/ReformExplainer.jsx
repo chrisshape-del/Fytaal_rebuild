@@ -2,14 +2,14 @@ import { motion } from 'framer-motion';
 
 export default function ReformExplainer({ content }) {
     const tag = content?.tag || "Wat is het?";
-    const title = content?.title || "Reformer Pilates uitgelegd";
-    const desc1 = content?.description1 || "Reformer Pilates is een geavanceerde vorm van Pilates op een speciaal ontworpen machine — de reformer. Met verstelbare veren train je met je eigen lichaamsgewicht en weerstand tegelijk.";
-    const desc2 = content?.description2 || "Anders dan mat-Pilates biedt de reformer meer variatie, meer controle en een diepere spieractivatie. Je traint je hele lichaam in één sessie: core, benen, armen, rug én flexibiliteit.";
-    const desc3 = content?.description3 || "Bij Fytaal combineren we de reformer met onze fysiotherapeutische kennis. Elke les is doordacht opgebouwd en geschikt voor elk niveau — van complete beginner tot gevorderde atleet.";
-    const tags = content?.tags || ['Diepere spieractivatie', 'Volledige lichaamstraining', 'Begeleiding op maat'];
+    const title = content?.title || "Wat is Reformer Pilates?";
+    const desc1 = content?.description1 || "Reformer pilates is een vorm van pilates waarbij je traint op een speciaal toestel: de reformer. Met veren, katrollen en een glijdend platform train je kracht, mobiliteit, stabiliteit en controle in één workout.";
+    const desc2 = content?.description2 || "Het is:\n• 💪 Krachttraining zonder je gewrichten te overbelasten\n• 🧘‍♀️ Mobiliteit & houding in één";
+    const desc3 = content?.description3 || "• 🧠 Focus op controle, ademhaling en lichaamsbewustzijn\n• 🔥 Verrassend intens (ja, echt)";
+    const tags = content?.tags || ['Kracht & Controle', 'Mobiliteit', 'Intens'];
     const image = content?.image || "https://images.unsplash.com/photo-1754257320382-95b43e9f797c?q=80&w=1200&auto=format&fit=crop";
-    const statNumber = content?.statNumber || "300+";
-    const statText = content?.statText || "oefeningen mogelijk";
+    const statNumber = content?.statNumber || "Max 8";
+    const statText = content?.statText || "deelnemers per les";
 
     return (
         <section className="py-24 md:py-32 px-6 md:px-20 bg-white relative overflow-hidden">
@@ -31,7 +31,7 @@ export default function ReformExplainer({ content }) {
                         {title}
                     </h2>
 
-                    <div className="space-y-6 text-lg text-[#082F26]/70 leading-relaxed font-light">
+                    <div className="space-y-6 text-lg text-[#082F26]/70 leading-relaxed font-light whitespace-pre-line">
                         <p>{desc1}</p>
                         <p>{desc2}</p>
                         <p>{desc3}</p>

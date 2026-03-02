@@ -4,20 +4,20 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 const defaultSteps = [
     {
         id: "01",
-        title: "Flow & Herstel",
-        description: "We beginnen met het losmaken van het lichaam. Vloeiende bewegingen op de reformer zorgen voor ruimte in je gewrichten en een rustige ademhaling.",
+        title: "Reformer Pilates",
+        description: "In kleine groepen of als (Duo) Personal Training, persoonlijke aandacht, hoogwaardige begeleiding.",
         image: "/reform-1.png"
     },
     {
         id: "02",
-        title: "Core & Stabiliteit",
-        description: "De basis van alles. We bouwen kracht op vanuit je kernspieren. Je leert je lichaam controleren en stabiliseren voor een sterke houding.",
+        title: "Leefstijl workshops",
+        description: "Over bewegen, voeding, herstel, energie, balans en duurzame gewoontes.",
         image: "/reform-2.png"
     },
     {
         id: "03",
-        title: "Kracht & Performance",
-        description: "We verhogen de weerstand. Dynamische en krachtige bewegingen dagen je spieren uit. Je bouwt aan een atletisch, sterk lichaam.",
+        title: "Coaching & begeleiding",
+        description: "Voor wie net wat meer verdieping zoekt in leefstijl, mindset, gezonder leven of voor wie meer uit het leven wil halen.",
         image: "/reform-3.png"
     }
 ];
@@ -29,8 +29,8 @@ export default function ReformMethod({ content }) {
         offset: ["start start", "end end"]
     });
 
-    const tag = content?.tag || "De Methode";
-    const title = content?.title || "Jouw Transformatie";
+    const tag = content?.tag || "Wat bieden we?";
+    const title = content?.title || "Wat je bij Re:form kunt\u00A0volgen";
     const steps = content?.steps || defaultSteps;
 
     return (
@@ -42,7 +42,7 @@ export default function ReformMethod({ content }) {
                         <span className="text-primary font-bold tracking-[0.2em] uppercase text-sm block mb-2">
                             {tag}
                         </span>
-                        <h2 className="text-4xl md:text-6xl font-heading font-black text-[#082F26]">
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-black text-[#082F26]">
                             {title}
                         </h2>
                     </div>

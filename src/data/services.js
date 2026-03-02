@@ -1,20 +1,4 @@
 export const servicesData = {
-    fysiotherapie: {
-        title: "FYSIOTHERAPIE",
-        subtitle: "Fysiotherapeutisch trainen bij Fytaal",
-        content: [
-            { type: "bold", text: "Van klacht naar kracht – herstel door bewegen" },
-            { type: "p", text: "Bewegen lijkt vanzelfsprekend. Tot het even niet meer lukt door een blessure, operatie of langdurige overbelasting. Juist dan wil je snel en effectief herstellen. Bij Fytaal combineren we fysiotherapie met doelgericht trainen. Zo min mogelijk passieve behandelingen, maar actief aan de slag om weer vertrouwen te krijgen in je lichaam en sterker dan ooit terug te komen." },
-            { type: "divider" },
-            { type: "h3", text: "Fysiotherapie & Medical Training" },
-            { type: "p", text: "Per 1 januari aanstaande verandert de invulling van fysiotherapie binnen Fytaal." },
-            { type: "p", text: "Vanaf dat moment worden alle fysiotherapeutische behandelingen uitgevoerd door MA Visio. Deze samenwerking sluit naadloos aan bij de visie van Fytaal: duurzaam herstel, persoonlijke begeleiding en doelgericht trainen." },
-            { type: "bold", text: "Fytaal blijft daarnaast Medical Personal Training aanbieden." },
-            { type: "p", text: "Deze vorm van training is bedoeld voor mensen die herstellen van een blessure, klachten hebben of vanuit een medische achtergrond willen (blijven) trainen." },
-        ],
-        cta: "MAAK EEN AFSPRAAK",
-        image: "/381A1610-1-edited-2048x1152.webp"
-    },
     "personal-training": {
         title: "PERSONAL TRAINING",
         subtitle: "Gericht. Persoonlijk. Effectief.",

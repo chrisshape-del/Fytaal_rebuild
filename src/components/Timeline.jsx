@@ -6,32 +6,37 @@ import { ArrowUpRight } from 'lucide-react';
 const defaultPhases = [
     {
         id: '01',
-        title: 'Herstel',
-        description: 'Fysiotherapeutische begeleiding van klacht naar belastbaarheid. Wij analyseren de oorzaak en bouwen een fundering voor herstel.',
+        title: 'Herstel van blessures',
+        shortTitle: 'Herstel',
+        description: 'Je lichaam heeft eerst rust, vertrouwen en de juiste prikkel nodig. In deze fase werk je aan veilig herstel, pijnvrij bewegen en het opnieuw opbouwen van basisvertrouwen in je lijf. Geen haast, wél richting vooruitgang.',
         image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=2070&auto=format&fit=crop'
     },
     {
         id: '02',
-        title: 'Opbouw',
-        description: 'Van revalidatie naar verantwoorde training. Stapsgewijs vergroten we de belasting om terugval te voorkomen.',
+        title: 'Van uitbehandeld naar actief',
+        shortTitle: 'Actief',
+        description: 'De pijn is weg, maar je voelt je nog niet "terug op niveau". Wij begeleiden de stap van behandeling naar verantwoord trainen. Je leert weer belasten, bewegen en sterker worden — mét vertrouwen in je lijf.',
         image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop'
     },
     {
         id: '03',
-        title: 'Kracht',
-        description: 'Fundering leggen voor een sterk en weerbaar lichaam. Krachttraining is essentieel voor lange termijn gezondheid.',
+        title: 'Trainen voor het dagelijks leven',
+        shortTitle: 'Dagelijks',
+        description: 'Sterk worden voor wat je elke dag doet. Tillen, bukken, traplopen, werken, zorgen, bewegen. Je traint functioneel, zodat je lichaam je leven makkelijker maakt in plaats van zwaarder.',
         image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop'
     },
     {
         id: '04',
-        title: 'Vitaliteit',
-        description: 'Optimaliseren van energie, voeding en leefstijl. Een holistische aanpak voor meer energie in het dagelijks leven.',
+        title: 'Trainen om alles uit het leven te halen',
+        shortTitle: 'Vitaal',
+        description: 'Je wilt meer energie, veerkracht en belastbaarheid. In deze fase bouw je aan een vitaal lichaam én geest dat meekan met jouw ambities, werk, gezin en vrije tijd.',
         image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=2070&auto=format&fit=crop'
     },
     {
         id: '05',
-        title: 'Performance',
-        description: 'Topsport begeleiding en grenzen verleggen. Voor wie het maximale uit zichzelf wil halen.',
+        title: 'Prestatiegerichte training',
+        shortTitle: 'Performance',
+        description: 'Voor wie doelen heeft in sport of performance. Je traint doelgericht op kracht, snelheid, conditie en belastbaarheid — slim opgebouwd, met oog voor herstel. Alles om beter te presteren, zonder onnodige blessures.',
         image: 'https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=2069&auto=format&fit=crop'
     }
 ];
@@ -125,7 +130,7 @@ export default function Timeline({ phases = defaultPhases }) {
                                         /* Inactive State Vertical Text */
                                         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full flex justify-center pb-8">
                                             <h3 className="text-3xl font-heading font-bold text-white/80 whitespace-nowrap [writing-mode:vertical-rl] rotate-180 tracking-widest uppercase opacity-80 hover:opacity-100 transition-opacity">
-                                                {phase.title}
+                                                {phase.shortTitle || phase.title}
                                             </h3>
                                         </div>
                                     )}

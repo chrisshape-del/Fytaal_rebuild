@@ -8,6 +8,7 @@ import Contact from './pages/Contact';
 import Approach from './pages/Approach';
 import SchedulePage from './pages/SchedulePage';
 import Reform from './pages/Reform';
+import MedicalTraining from './pages/MedicalTraining';
 
 // Admin Imports
 import Login from './admin/Login';
@@ -54,6 +55,7 @@ function App() {
 
           <Route path="aanbod">
             <Route index element={<ServicesOverview />} />
+            <Route path="medical-training" element={<MedicalTraining />} />
             <Route path=":slug" element={<ServicePage />} />
           </Route>
 

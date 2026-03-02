@@ -13,7 +13,7 @@ export default function Navbar() {
     const [isAanbodOpen, setIsAanbodOpen] = useState(false);
 
     const aanbodItems = [
-        { name: "Fysiotherapie", path: "/aanbod/fysiotherapie" },
+        { name: "Medical Training", path: "/aanbod/medical-training" },
         { name: "Personal Training", path: "/aanbod/personal-training" },
         { name: "Vitaliteit", path: "/aanbod/vitaliteit" },
         { name: "Hyrox", path: "/aanbod/hyrox" },
