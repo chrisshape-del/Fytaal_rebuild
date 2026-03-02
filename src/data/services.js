@@ -38,6 +38,13 @@ export const servicesData = {
         cta: "BOEK EEN KENNISMAKINGSGESPREK",
         image: "/Koen-683x1024.webp"
     },
+    "medical-training": {
+        title: "MEDICAL TRAINING",
+        subtitle: "Van klacht naar kracht. Verantwoord terug naar bewegen.",
+        content: [], // Custom page implementation handles the content
+        cta: "BEKIJK AANBOD",
+        image: "/381A1610-1-edited-2048x1152.webp"
+    },
     vitaliteit: {
         title: "LEEFSTIJLCOACHING",
         subtitle: "LeefstijlCoaching bij Fytaal",

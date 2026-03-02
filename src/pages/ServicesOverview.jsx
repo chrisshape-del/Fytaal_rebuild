@@ -5,6 +5,7 @@ import { servicesData } from '../data/services';
 
 const icons = {
     fysiotherapie: HeartPulse,
+    "medical-training": HeartPulse,
     vitaliteit: Zap,
     hyrox: Trophy,
     "personal-group-training": Users,
@@ -14,6 +15,7 @@ const icons = {
 
 const colors = {
     fysiotherapie: "bg-blue-50 text-blue-600",
+    "medical-training": "bg-teal-50 text-teal-600",
     vitaliteit: "bg-green-50 text-green-600",
     hyrox: "bg-yellow-50 text-yellow-600",
     "personal-group-training": "bg-purple-50 text-purple-600",
