@@ -94,7 +94,7 @@ export default function ServicesOverview() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.1 }}
-                                    className="bg-white rounded-3xl p-8 h-full border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden"
+                                    className="bg-white rounded-3xl p-8 h-full border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden flex flex-col"
                                 >
                                     {/* Image Background (Semi-transparent) */}
                                     <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500">
@@ -110,12 +110,12 @@ export default function ServicesOverview() {
                                         {service.title}
                                     </h3>
 
-                                    <p className="text-slate-500 mb-8 line-clamp-3 leading-relaxed">
+                                    <p className="text-slate-500 mb-8 line-clamp-3 leading-relaxed flex-grow">
                                         {service.subtitle}
                                         {/* A simple hack to get a bit more text if subtitle is short, usually we'd want a separate description field */}
                                     </p>
 
-                                    <div className="flex items-center gap-2 text-primary font-bold text-sm tracking-wide uppercase group/link">
+                                    <div className="flex items-center gap-2 text-primary font-bold text-sm tracking-wide uppercase group/link mt-auto">
                                         Bekijk aanbod <MoveRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
                                     </div>
                                 </motion.div>
