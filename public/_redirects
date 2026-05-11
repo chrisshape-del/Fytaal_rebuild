@@ -1,0 +1,12 @@
+/baaslogin /index.html 200
+/admin /index.html 200
+/admin/* /index.html 200
+/onze-aanpak /index.html 200
+/aanbod /index.html 200
+/aanbod/* /index.html 200
+/team /index.html 200
+/contact /index.html 200
+/rooster /index.html 200
+/reform /index.html 200
+/privacy /index.html 200
+/terms /index.html 200
